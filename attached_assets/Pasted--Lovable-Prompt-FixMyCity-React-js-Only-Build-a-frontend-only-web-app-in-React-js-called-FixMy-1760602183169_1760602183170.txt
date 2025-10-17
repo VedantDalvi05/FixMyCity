@@ -1,0 +1,181 @@
+✅ Lovable Prompt — FixMyCity (React.js Only)
+
+Build a frontend-only web app in React.js called FixMyCity with two roles: Citizens and Admins. The app should use ONLY React.js (with React Router), localStorage for storage, and Leaflet for maps.
+
+👤 CITIZEN FEATURES
+
+Users should be able to:
+
+Report civic issues (potholes, garbage, streetlight, drainage, other).
+
+Upload photos from phone gallery (1–3 images).
+
+Add description, category, and location (auto-detect GPS + manual entry).
+
+Submit and receive a unique ticket ID.
+
+Track their own issue statuses (Submitted → In Progress → Resolved).
+
+View ONLY their submitted issues.
+
+🗺️ PUBLIC MAP VIEW (USER SIDE)
+
+Create a map page using Leaflet where:
+
+Each issue appears as a colored dot, based on category:
+
+🔴 Red – Potholes
+
+🟢 Green – Garbage
+
+🟡 Yellow – Streetlight
+
+🔵 Blue – Drainage
+
+🟣 Purple – Other
+
+On clicking a dot, show:
+
+Issue image(s)
+
+Description
+
+Category & status
+
+Address/location
+This lets users see what’s happening around their city.
+
+🛠️ ADMIN DASHBOARD (HIGH INFORMATION DENSITY)
+
+The admin view must be data-rich and include:
+
+✅ Overview Stats
+
+Total reports
+
+Pending / In-progress / Resolved
+
+New this week
+
+Average resolution time
+
+✅ Charts & Analytics
+
+Category-wise pie chart
+
+Area/ward-based bar chart
+
+Resolved vs pending graph
+
+Trendline of reports over time
+
+✅ Interactive Map (Admin View)
+
+Same color-coded markers as user map
+
+Click marker → view issue details & images
+
+Optional filtering by category and status
+
+✅ Report Management Table
+
+Thumbnail preview
+
+Category
+
+Area
+
+Description
+
+Status
+
+Severity (optional)
+
+Reporter details (if provided)
+
+Search, filter, and sorting
+
+Click to open modal with full info
+
+Update status (Submitted → In Progress → Resolved)
+
+Add admin notes
+
+Export CSV
+
+🔐 AUTHENTICATION (Mock Only)
+
+Use hardcoded credentials:
+
+User: user@demo / password
+
+Admin: admin@demo / admin123
+
+Use client-side route protection only.
+
+💾 DATA & STORAGE
+
+Use localStorage to store reports.
+
+Seed with 8–10 demo issues on first load.
+
+Each report object should include:
+
+{
+  id,
+  category,
+  description,
+  photos[],
+  location: { lat, lng, address },
+  areaCode,
+  status,
+  severity,
+  createdAt,
+  updatedAt,
+  reporter: { id, name, contact },
+  adminNotes: []
+}
+
+🎨 UI STYLE
+
+Design: Modern civic theme
+
+Typography: Minimal & clean (use Inter or Poppins)
+
+Color Palette:
+
+Primary: Teal (#008080)
+
+Secondary: Slate Gray (#708090)
+
+Background: Soft White (#F8F9FA)
+
+Fully responsive and mobile-first
+
+✅ ROUTING EXAMPLE
+
+/login
+
+/report
+
+/my-reports
+
+/map
+
+/admin/dashboard
+
+/admin/report/:id
+
+✅ TECH STACK (Strict)
+
+React.js ONLY
+
+React Router
+
+Leaflet (for maps)
+
+Chart.js or Recharts (charts)
+
+localStorage (data persistence)
+
+No backend, no external DB

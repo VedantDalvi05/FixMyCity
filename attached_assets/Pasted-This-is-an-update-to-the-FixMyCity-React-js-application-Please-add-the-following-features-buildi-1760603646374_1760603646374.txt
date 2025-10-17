@@ -1,0 +1,91 @@
+This is an update to the "FixMyCity" React.js application. Please add the following features, building upon the existing structure (Citizen Dashboard, Admin Dashboard, localStorage, etc.).
+
+## 🚀 1. Enhanced User Engagement & Community Building
+A. "Before & After" Photo Comparison
+
+Trigger: When a report's status is "Resolved."
+
+User Flow: The original reporter should see a prompt on their "My Reports" page to "Upload 'After' Photo."
+
+UI: In the report's detail view, display the original photos[] and the new resolvedPhotoURL in a side-by-side "Before/After" comparison.
+
+Data: Add a new field to the report object in localStorage: resolvedPhotoURL: string | null.
+
+B. Social Sharing Integration
+
+UI: Add a "Share" icon/button to each report card on the /my-reports page and the public /map modal.
+
+Functionality: On click, use the Web Share API (or a fallback) to open the user's native share menu with pre-populated text.
+
+Example Text (New Report): "I just reported a [Category] issue on [Address] using #FixMyCity. Let's get our community fixed! [Public Map URL]"
+
+Example Text (Resolved Report): "Great news! The [Category] issue I reported on [Address] has been fixed. Thanks to the city! #FixMyCity"
+
+C. Detailed Issue Timeline
+
+UI: Inside the detail view of a report, replace the simple status display with a vertical timeline that logs all changes.
+
+Data: Modify the report object to include an updateHistory array. Each time a status is changed or an admin note is added, push a new object to this array.
+
+JavaScript
+
+// Add to the report object in localStorage
+updateHistory: [
+  { timestamp: '2025-10-16T10:00:00Z', event: 'Report Submitted' },
+  { timestamp: '2025-10-17T09:30:00Z', event: 'Status changed to In Progress' },
+  { timestamp: '2025-10-17T09:31:00Z', event: 'Admin Note Added: "Team assigned."' },
+  // ... and so on
+]
+## 💡 2. Smarter Data & User Awareness
+A. Estimated Resolution Time (ETA) Display
+
+UI: On the /report form, when a user selects an issue category from the dropdown, display a small, non-intrusive text below it with an estimated resolution time.
+
+Implementation: Use a hardcoded mapping object on the frontend. No complex logic is needed.
+
+JavaScript
+
+const resolutionETAs = {
+  'Potholes': 'Estimated resolution: 5-7 business days',
+  'Garbage': 'Estimated resolution: 2 business days',
+  'Streetlight': 'Estimated resolution: 3-5 business days',
+  // etc.
+};
+B. Report Heatmap View
+
+UI: On the public /map page, add a toggle switch or button group that allows users to switch between the default "Marker View" and a new "Heatmap View."
+
+Functionality: The heatmap should visually represent the density of reported issues across the city.
+
+Tech Stack: Use a Leaflet plugin like Leaflet.heat for this functionality.
+
+C. Offline Reporting Queue
+
+Functionality:
+
+Detect if the user is offline when they hit "Submit" on the report form.
+
+If offline, save the entire report object (including photo data, maybe as base64) to a separate pendingReports array in localStorage.
+
+Notify the user: "You're offline. Your report has been saved and will be submitted when you're back online."
+
+When the app detects the connection is restored, show a notification/toast: "You have pending reports. [Submit Now]". Submitting should move them from the pendingReports array to the main reports array.
+
+## ♿ 3. Accessibility & Usability
+A. High-Contrast Mode
+
+UI: Add a simple accessibility icon (e.g., a person icon) in the header or footer that toggles a high-contrast mode.
+
+Implementation: When toggled, add a high-contrast class to the <body> tag. Use CSS to define a separate color scheme for all components when this class is present (e.g., black background, yellow/white text, pronounced borders).
+
+B. Font Size Adjuster
+
+UI: Next to the high-contrast toggle, add two buttons: A- and A+.
+
+Implementation:
+
+Ensure all font sizes in your CSS are defined using relative units (rem).
+
+Clicking the buttons should change the base font-size on the <html> element (e.g., from 16px to 18px). This will scale all text across the app proportionally.
+
+Persist the user's choice in localStorage.
